@@ -73,7 +73,10 @@ for (let 語言名稱 in 語言s) {
 		let 編號 = value.substr(0, 空白位置);
 		let 內容 = value.substr(空白位置);
 		if (對照表[編號] === undefined) 對照表[編號] = {};
-		對照表[編號][語言名稱] = 移除註解(內容).split('\\n').flatMap(s => [s + '\\n', text2html('<br>')]);
+		let 內容2 = 移除註解(內容).split('\\n');
+		let 內容3 = [內容2.shift()];
+		for (let v of 內容2) { 內容3.push('\\n', text2html('<br>'), v); }
+		對照表[編號][語言名稱] = 內容3;
 	}
 }
 let tbody = document.querySelector('tbody');
